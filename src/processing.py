@@ -1,17 +1,17 @@
 from datetime import datetime
 from typing import List
 
-def filter_by_state(list_of_dictionaries, state: str='EXECUTED'):
+def filter_by_state(list_dictionaries, state: str='EXECUTED'):
     """Функция, которая принимает список словарей и опционально значение для ключа
     (по умолчанию 'EXECUTED')
     и возвращает новый список словарей, содержащих только те словари, у которых ключ
     state соответствует указанному значению.
     """
-    new_list_of_dicts = []
-    for new_list_of_dict in list_of_dictionaries:
-        if new_list_of_dict.get('state') == state:
-            new_list_of_dicts.append(new_list_of_dict)
-    return new_list_of_dicts
+    new_list_dicts = []
+    for new_list_dict in list_dictionaries:
+        if new_list_dict.get('state') == state:
+            new_list_dicts.append(new_list_of_dict)
+    return new_list_dicts
 
 
 print(filter_by_state([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
@@ -20,13 +20,13 @@ print(filter_by_state([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03
                        {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}]))
 
 
-def sort_by_date(list_of_dictionaries: list[dict], reverse_order: bool = True) -> list[dict]:
+def sort_by_date(list_dictionaries: list[dict], reverse_order: bool = True) -> list[dict]:
     """Функция, которая принимает список словарей и необязательный параметр, задающий
     порядок сортировки (по умолчанию - убывание) и возвращает новый список, отсортированный по дате (date)
     """
-    for item in list_of_dictionaries:
+    for item in list_dictionaries:
         item['date'] = datetime.strptime(item['date'], "%Y-%m-%dT%H:%M:%S.%f")
-    sorted_list = sorted(list_of_dictionaries, key=lambda x: x['date'], reverse=reverse_order)
+    sorted_list = sorted(list_dictionaries, key=lambda x: x['date'], reverse=reverse_order)
 
     return sorted_list
 
