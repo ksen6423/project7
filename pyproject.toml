@@ -2,7 +2,7 @@
 name = "pythonproject8"
 version = "0.1.0"
 description = ""
-authors = ["Kseniia Vakhterova <vlsen23@list.ru>"]
+authors = ["Kseniia Vakhterova <vksen23@list.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -22,7 +22,7 @@ lint = [
 ]
  [tool.black]
 line-length = 119
-exclude = '.git'
+exclude = ".git"
 
 [tool.isort]
 line-length = 119
