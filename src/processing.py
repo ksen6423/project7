@@ -10,7 +10,7 @@ def filter_by_state(list_dictionaries, state: str='EXECUTED'):
     new_list_dicts = []
     for new_list_dict in list_dictionaries:
         if new_list_dict.get('state') == state:
-            new_list_dicts.append(new_list_of_dict)
+            new_list_dicts.append(new_list_dict)
     return new_list_dicts
 
 
