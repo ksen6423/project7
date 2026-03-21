@@ -7,11 +7,11 @@ def filter_by_state(list_dictionaries, state: str='EXECUTED'):
     и возвращает новый список словарей, содержащих только те словари, у которых ключ
     state соответствует указанному значению.
     """
-    new_list_dicts = []
-    for new_list_dict in list_dictionaries:
-        if new_list_dict.get('state') == state:
-            new_list_dicts.append(new_list_dict)
-    return new_list_dicts
+    dicts_state = []
+    for dict_state in list_dictionaries:
+        if dicts_state.get('state') == state:
+            dicts_state.append(dict_state)
+    return dicts_state
 
 
 print(filter_by_state([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
