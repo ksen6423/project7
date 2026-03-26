@@ -9,7 +9,7 @@ def filter_by_state(list_dictionaries, state: str='EXECUTED'):
     """
     dicts_state = []
     for dict_state in list_dictionaries:
-        if dicts_state.get('state') == state:
+        if dict_state.get('state') == state:
             dicts_state.append(dict_state)
     return dicts_state
 
