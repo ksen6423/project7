@@ -9,7 +9,7 @@ def mask_account_card(card_and_account: str | int) -> str:
 
             if len(word) == 20:
                 account_card_split[i] = src.masks.get_mask_account(word)
-            if len(word) == 16:
+            if len(word) ==16:
                 account_card_split[i] = src.masks.get_mask_card_number(word)
         account_card_view = ' '.join(account_card_split)
     return account_card_view
