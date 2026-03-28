@@ -27,3 +27,7 @@ def length_account_mask():
 @pytest.fixture
 def get_date_format():
     return "11.03.2024"
+
+@pytest.fixture
+def filter_state():
+    return {'state': 'EXECUTED'}
