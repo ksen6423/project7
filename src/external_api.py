@@ -17,20 +17,20 @@ def currency_conversion(translation: dict) -> float:
         amount = float(translation["operationAmount"]["amount"])
         currency = translation["operationAmount"]["currency"]["code"]
 
-        if currency != "RUB":
+        if currency != "USD":
             url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount}"
             payload = {}
             headers = {"apikey": API_KEY}
             response = requests.request("GET", url=url, headers=headers, data=payload)
-            status_code = response.status_code
+            # status_code = response.status_code
             result = json.loads(response.text)
             amount_rub = float(result['result'])
             return amount_rub
-            if status_code != 200:
-                print(f"Ошибка запроса: Код {status_code}, Описание: {result}")
-                return 0.0
-            else:
-                return f"Запрос не выполнен.n\Код ошибки: {status_code}.n\Описание ошибки: {result}"
+            # if status_code != 200:
+            #     print(f"Ошибка запроса: Код {status_code}, Описание: {result}")
+            #     return 0.0
+            # else:
+            #     return f"Запрос не выполнен.n\Код ошибки: {status_code}.n\Описание ошибки: {result}"
 
         else:
             return amount
