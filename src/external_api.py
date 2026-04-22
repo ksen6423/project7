@@ -1,9 +1,8 @@
 import os
 import requests
 from dotenv import load_dotenv
-import pytest
 import json
-from unittest.mock import patch, Mock
+
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -17,7 +16,7 @@ def currency_conversion(translation: dict) -> float:
         amount = float(translation["operationAmount"]["amount"])
         currency = translation["operationAmount"]["currency"]["code"]
 
-        if currency != "USD":
+        if currency != "RUB":
             url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount}"
             payload = {}
             headers = {"apikey": API_KEY}
@@ -36,27 +35,3 @@ def currency_conversion(translation: dict) -> float:
         return 0.0
 
 
-transaction = {
-    "operationAmount": {
-        "amount": "100.0",
-        "currency": {
-            "code": "USD"
-        }
-    }
-}
-
-
-@patch('requests.request')
-def test_currency_conversion(mock_request):
-    mock_response = Mock()
-    mock_response.status_code = 200
-    mock_response.text = json.dumps({'result': '7500.0'})
-    mock_request.return_value = mock_response
-
-    result = currency_conversion(transaction)
-
-    assert result == 7500.0
-
-
-if __name__ == "__main__":
-    pytest.main()

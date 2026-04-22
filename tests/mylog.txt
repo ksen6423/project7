@@ -1,1 +1,3 @@
 divide_function ok
+divide_function ok
+divide_function ok
