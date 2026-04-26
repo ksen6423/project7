@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.14"
 python-dotenv = "^1.2.2"
 requests = "^2.33.1"
+pandas = "^3.0.2"
+openpyxl = "^3.1.5"
 
 
 [build-system]
