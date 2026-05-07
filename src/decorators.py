@@ -1,7 +1,5 @@
 import functools
 
-from functools import wraps
-
 
 def log(filename=None):
     """
@@ -38,4 +36,6 @@ def log(filename=None):
 @log(filename="mylog.txt")
 def divide_function(x, y):
     return x / y
+
+
 divide_function(4, 2)

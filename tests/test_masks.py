@@ -1,12 +1,9 @@
 import pytest
-
-
-from src.masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def test_length_card(length_card):
     assert get_mask_card_number([]) == length_card
-
 
 
 @pytest.mark.parametrize("value, expected", [
@@ -23,6 +20,7 @@ def test_mask_card(value, expected):
 
 def test_length_account(length_account):
     assert get_mask_account([]) == length_account
+
 
 @pytest.mark.parametrize("value, expected", [
     ("12345678912345678912", "**8912"),

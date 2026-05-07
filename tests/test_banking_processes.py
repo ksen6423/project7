@@ -1,5 +1,6 @@
 import pytest
-from src.banking_processes import process_bank_search, process_bank_operations
+from src.banking_processes import process_bank_operations, process_bank_search
+
 
 @pytest.fixture
 def data_():
@@ -12,22 +13,24 @@ def data_():
         {'description': 'Transfer to bank'},
         {'description': 'Payment to Jane'},
     ]
+
 
 @pytest.mark.parametrize(
     "description_word, data_frm",
     [
-       ("Payment", [{'description': 'Payment to Jane'},{'description': 'Payment to John'}]),
-       ("payment", [{'description': 'Payment to Jane'},{'description': 'Payment to John'}]),
-       ("Groceries", []),
-       ([], []),
+        ("Payment", [{'description': 'Payment to Jane'}, {'description': 'Payment to John'}]),
+        ("payment", [{'description': 'Payment to Jane'}, {'description': 'Payment to John'}]),
+        ("Groceries", []),
+        ([], []),
     ],
 )
-def test_process_bank_search(data_, description_word, data_frm):
-    result = process_bank_search(data_, description_word)
+def test_process_bank_search(description_word, data_frm, ):
+    result = process_bank_search(data_, description_word, data_frm)
     assert result == data_frm
 
+
 @pytest.fixture
-def data_():
+def data_categories():
     return [
         {'description': 'Food'},
         {'description': 'Transport'},
@@ -37,6 +40,7 @@ def data_():
         {'description': 'Transfer to bank'},
         {'description': 'Payment to Jane'},
     ]
+
 
 @pytest.mark.parametrize(
     "categories_lst, categories_lst_frm",
@@ -44,11 +48,10 @@ def data_():
         (['Food', 'Transport', 'Entertainment'], {'Food': 2, 'Transport': 1, 'Entertainment': 1}),
         (['Groceries', 'Travel'], {}),
         ([], {}),
-        ],
+    ],
 )
-
-def test_process_bank_operations(data_, categories_lst, categories_lst_frm):
-    result = process_bank_operations(data_, categories_lst)
+def test_process_bank_operations(data_categories, categories_lst, categories_lst_frm):
+    result = process_bank_operations(data_categories, categories_lst)
     assert result == categories_lst_frm
 
 

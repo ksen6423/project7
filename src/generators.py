@@ -11,16 +11,12 @@ def filter_by_currency(transactions: List[Dict[str, Any]], currency_code: str) -
             yield transaction
 
 
-
-
 def transaction_descriptions(transactions: List[Dict[str, Any]]) -> iter:
     """
       Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
     """
     for transaction in transactions:
         yield transaction['description']
-
-
 
 
 def card_number_generator(start: int, stop: int) -> iter:

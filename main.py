@@ -1,10 +1,12 @@
+from datetime import datetime
 
-from src.file_operations import reading_csv_file, reading_excel_file
-from src.utils import read_json_file
 from src.banking_processes import process_bank_search
+from src.file_operations import reading_csv_file, reading_excel_file
 from src.generators import filter_by_currency
-from src.processing import sort_by_date, filter_by_state
 from src.masks import get_mask_account
+from src.processing import filter_by_state, sort_by_date
+from src.utils import read_json_file
+
 
 def main():
     """
@@ -20,12 +22,12 @@ def main():
         user_choice = input().strip()
 
         if user_choice == "1":
-            file_json_path = 'data/operations.json'
+            file_json_path = 'data/operation.json'
             transactions = read_json_file(file_json_path)
             print('Был выбран JSON')
             break
         elif user_choice == "2":
-            file_csv_path = 'data/transactions (1).csv'
+            file_csv_path = 'C:/Users/cfif/PycharmProjects/PythonProject8/data/transactions (1).csv'
             transactions = reading_csv_file(file_csv_path)
             print('Был выбран CSV')
             break
@@ -57,13 +59,19 @@ def main():
         if sort_by_date_choice == 'да':
             order_choice = input('Отсортировать по возрастанию или по убыванию?\n').strip().lower()
             if order_choice == 'по возрастанию':
-                order_filter = False
-                ft = sort_by_date(ft, order_filter)
+                ft = sort_by_date(ft, reverse_order=False)  # Сортировка по возрастанию
+                break
+            elif order_choice == 'по убыванию':
+                ft = sort_by_date(ft, reverse_order=True)  # Сортировка по убыванию
                 break
             else:
-                break
-        else:
+                print("Некорректный выбор. Введите 'по возрастанию' или 'по убыванию'.")  # Сообщение об ошибке
+                continue  # Повторяем запрос
+        elif sort_by_date_choice == 'нет':
             break
+        else:
+            print("Некорректный выбор. Введите 'Да' или 'Нет'.")  # Сообщение об ошибке
+            continue
 
     while True:
         currency_choice = input('Выводить только рублевые транзакции? Да/Нет\n').strip().lower()
@@ -90,25 +98,25 @@ def main():
         else:
             continue
 
-    print("Распечатываю итоговый список транзакций...")
-    print(ft)
-    print("Всего банковских операций в списке: {len(filter_transactions)}")
-    transactions = [
-        {'id': 407169720, 'state': 'EXECUTED', 'date': '2018-02-03T14:52:08.093722',
-        'operationAmount': {'amount': '67011.26', 'currency': {'name': 'руб.', 'code': 'RUB'}},
-        'description': 'Перевод с карты на карту', 'from': 'MasterCard 4047671689373225', 'to':
-        'Maestro 3806652527413662'}
-        ]
-    for transaction in transactions:
-        date = sort_by_date(transaction["date"])
-        description = transaction["description"]
-        from_account = get_mask_account(transaction.get("from", ""))
-        to_account = get_mask_account(transaction.get("to", ""))
-        amount = transaction['operationAmount']['amount']
-        currency = transaction['operationAmount']['currency']['name']
+    print(f"Распечатываю итоговый список транзакций...{ft} ")
+    print(f"Всего банковских операций в списке: {len(ft)}")
 
-        print(f"{date}{description}")
-        print(f"{from_account} -> {to_account}")
-        print(f"Сумма: {amount}{currency}")
+    for transaction in ft:
+        date_str = transaction.get("date", "")
+        try:
+            date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y %H:%M")
+        except (ValueError, TypeError):
+            date = "Неизвестная дата"
+
+        description = transaction.get("description", "Без описания")
+        from_account = get_mask_account(transaction.get("from", "")) or "Неизвестно"
+        to_account = get_mask_account(transaction.get("to", "")) or "Неизвестно"
+
+    # Получаем сумму и валюту
+        amount = transaction.get("amount", transaction.get("operationAmount", {}).get("amount", "Неизвестно"))
+        currency = transaction.get("currency_code",
+                                   transaction.get("operationAmount", {}).get("currency", {}).get("name", "Неизвестно"))
 
 
+if __name__ == "__main__":
+    main()

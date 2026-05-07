@@ -1,11 +1,10 @@
 from datetime import datetime
-from typing import List
+# from typing import List
+
 
 def filter_by_state(list_dictionaries, state: str='EXECUTED'):
     """Функция, которая принимает список словарей и опционально значение для ключа
     (по умолчанию 'EXECUTED')
-    и возвращает новый список словарей, содержащих только те словари, у которых ключ
-    state соответствует указанному значению.
     """
     dicts_state = []
     for dict_state in list_dictionaries:
@@ -28,6 +27,7 @@ def sort_by_date(list_dictionaries: list[dict], reverse_order: bool = True) -> l
         list_dictionaries,
         key=lambda x: datetime.strptime(x['date'], "%Y-%m-%dT%H:%M:%S.%f"),
         reverse=reverse_order)
+
 
 print(sort_by_date([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
                     {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},

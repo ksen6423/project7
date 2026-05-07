@@ -1,10 +1,7 @@
 import os
-
 import pytest
+from src.decorators import log
 
-from  src.decorators import  log
-
-import functools
 
 @log()
 def divide_function_console(x, y):
