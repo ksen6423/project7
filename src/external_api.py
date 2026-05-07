@@ -1,8 +1,8 @@
+import json
 import os
+
 import requests
 from dotenv import load_dotenv
-import json
-
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -33,5 +33,3 @@ def currency_conversion(translation: dict) -> float:
     except Exception as e:
         print(f"Ошибка конвертации: {e}")
         return 0.0
-
-

@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def reading_csv_file(file: str) -> list:
     """Функция чтения файла csv"""
     try:
@@ -14,9 +15,8 @@ def reading_csv_file(file: str) -> list:
 
 
 if __name__ == "__main__":
-    transactions  = reading_csv_file("../data/transactions(1).csv")
+    transactions = reading_csv_file("C:/Users/cfif/PycharmProjects/PythonProject8/data/transactions (1).csv")
     print(transactions[:10])
-
 
 
 def reading_excel_file(path_excel: str) -> list:

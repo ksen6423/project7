@@ -1,15 +1,13 @@
-from typing import Any, Dict, List, Union
-
+from typing import Any, Dict, List
 import pytest
+from src.generators import (card_number_generator, filter_by_currency, transaction_descriptions)
 
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 @pytest.mark.parametrize("currency_code, expected_count", [
     ("USD", 3),
     ("RUB", 2),
     ("EUR", 0)
 ])
-
 def test_filter_by_currency(transactions_: List[Dict[str, Any]], currency_code: str, expected_count: int) -> None:
     result = list(filter_by_currency(transactions_, currency_code))
     assert len(result) == expected_count
@@ -20,15 +18,15 @@ def test_filter_by_currency(transactions_: List[Dict[str, Any]], currency_code: 
 
 @pytest.mark.parametrize("transactions_, expected_descriptions", [
     ([  # Список транзакций
-        {'description': 'Перевод организации'},
-        {'description': 'Перевод со счета на счет'},
-        {'description': 'Перевод со счета на счет'},
-        {'description': 'Перевод с карты на карту'},
-        {'description': 'Перевод организации'}
-    ],
-    [
-        "Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет",
-        "Перевод с карты на карту", "Перевод организации"
+     {'description': 'Перевод организации'},
+     {'description': 'Перевод со счета на счет'},
+     {'description': 'Перевод со счета на счет'},
+     {'description': 'Перевод с карты на карту'},
+     {'description': 'Перевод организации'}
+     ],
+     [
+         "Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет",
+         "Перевод с карты на карту", "Перевод организации"
     ]),
     ([], [])
 ])
@@ -44,6 +42,3 @@ def test_transaction_descriptions(transactions_, expected_descriptions):
 def test_card_number_generator(start, stop, expected):
     result = list(card_number_generator(start, stop))
     assert result == expected
-
-
-
