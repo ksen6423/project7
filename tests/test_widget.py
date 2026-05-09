@@ -27,8 +27,6 @@ def test_length_card_error(value, expected):
     ("Счет 73654108430135874305", "Счет **4305"),
     ("Счет 65423658971223364411", "Счет **4411")
 ])
-
-
 def test_length_account_error(value, expected):
     assert mask_account_card(value) == expected
 

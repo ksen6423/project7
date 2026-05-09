@@ -4,7 +4,7 @@ import pandas as pd
 def reading_csv_file(file: str) -> list:
     """Функция чтения файла csv"""
     try:
-        file_csv = pd.read_csv(file)
+        file_csv = pd.read_csv(file, sep=';')
         return file_csv.to_dict('records')
     except FileNotFoundError:
         print(f"Файл не найден: {file}")
@@ -26,6 +26,7 @@ def reading_excel_file(path_excel: str) -> list:
     except ValueError as e:
         raise ValueError(f"Ошибка при чтении файла Excel: {e}")
     return transactions_exl_list
+
 
 if __name__ == "__main__":
     transactions = reading_csv_file("../data/transactions_excel.xlsx")

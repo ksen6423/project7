@@ -3,7 +3,8 @@ from src.processing import filter_by_state, sort_by_date
 
 
 def test_state():
-    assert filter_by_state([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}]) == [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}]
+    assert (filter_by_state([{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}])
+            == [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}])
     assert filter_by_state([{'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'}]) == []
 
 
@@ -12,8 +13,6 @@ def test_state():
                            [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}]),
                           ([{'id': 123, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}],
                            [{'id': 123, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}])])
-
-
 def test_state_expected(value, expected):
     assert filter_by_state(value) == expected
 

@@ -27,7 +27,6 @@ def test_length_account(length_account):
     ("32165498732165498732", "**8732"),
     ("95286395286395286395", "**6395")
 ])
-
 def test_mask_account(value, expected):
     assert get_mask_account(value) == expected
 
