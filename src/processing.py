@@ -2,7 +2,7 @@ from datetime import datetime
 # from typing import List
 
 
-def filter_by_state(list_dictionaries, state: str='EXECUTED'):
+def filter_by_state(list_dictionaries, state: str = 'EXECUTED'):
     """Функция, которая принимает список словарей и опционально значение для ключа
     (по умолчанию 'EXECUTED')
     """

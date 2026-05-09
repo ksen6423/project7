@@ -115,7 +115,8 @@ def main():
     # Получаем сумму и валюту
         amount = transaction.get("amount", transaction.get("operationAmount", {}).get("amount", "Неизвестно"))
         currency = transaction.get("currency_code",
-                                       transaction.get("operationAmount", {}).get("currency", {}).get("name", "Неизвестно"))
+                                   transaction.get("operationAmount", {}).get("currency", {}).
+                                   get("name", "Неизвестно"))
         print(f"{date} {description}")
         print(f"{from_account} -> {to_account}")
         print(f"Сумма: {amount} {currency}")
